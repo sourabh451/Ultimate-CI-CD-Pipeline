@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Static Code Analysis') {
       environment {
-        SONAR_URL = "http://ip address:9000"
+        SONAR_URL = "http://18.210.14.255:9000"
       }
       steps {
         withCredentials([string(credentialsId: 'sonarqube', variable: 'SONAR_AUTH_TOKEN')]) {
@@ -49,7 +49,7 @@ pipeline {
     stage('Trigger CD Pipeline') {
       steps {
         script {
-            sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'BUILD_NUMBER=${BUILD_NUMBER}' 'http://ip address:8080/job/gitops-ultimate-demo/buildWithParameters?token=gitops-token'"
+            sh "curl -v -k --user admin:${JENKINS_API_TOKEN} -X POST -H 'cache-control: no-cache' -H 'content-type: application/x-www-form-urlencoded' --data 'BUILD_NUMBER=${BUILD_NUMBER}' 'http://18.210.14.255:8080/job/gitops-ultimate-demo/buildWithParameters?token=gitops-token'"
         }
       }
     }
